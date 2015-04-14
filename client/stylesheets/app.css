@@ -1,0 +1,51 @@
+
+
+#main_view{
+	padding-top: 80px;
+}
+
+
+.box{
+  display:block;
+  margin: 10px;
+  background-color: rgba(255,255,255, .75);
+  border-radius: 10px;
+  padding: 10px;
+
+}
+
+
+#callToAction{
+  width: 100%;
+  background-color: rgba(0,0,0, .45);
+  margin-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.headroom--pinned {
+  opacity: 1;
+}
+
+
+
+.headroom--unpinned{
+	opacity: .35;
+}
+
+
+
+#login_logo{
+ 	display:block;
+    margin:auto;
+    margin-bottom: 10px;
+}
+
+.navbar{
+	min-height: 60px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
+}
+

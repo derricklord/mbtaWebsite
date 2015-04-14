@@ -1,16 +1,16 @@
-<div class="container">
-  <div class="panel panel-default">
+<div class="container animated fadeInUp">
+  <div class="panel panel-default  ">
     <div class="panel-heading">Student Data</div>
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-12">
           <ul class="list-group">
               <li class="list-group-item" ng-repeat="student in data">
-                  <h3>
+                  <p>
                     <i class="glyphicon glyphicon-user"></i>
                     <a href="{{student.url}}">{{student.name}}</a>
                     <small class="pull-right">Grade: {{student.grade}}</small>
-                  </h3>
+                  </p>
               </li>
           </ul>
         </div>
