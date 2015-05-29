@@ -9,7 +9,7 @@ angular.module('MyApp')
     
     $scope.checkAuthorized = function(){
         if($auth.isAuthenticated()){
-            console.log(User.isAdmin());
+            //console.log(User.isAdmin());
             $scope.isAuthorized = User.isAdmin();
         }else{
             $scope.isAuthorized = false;
