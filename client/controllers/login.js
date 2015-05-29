@@ -5,7 +5,11 @@ angular.module('MyApp')
         .then(function() {
           Account.getProfile()
             .success(function(data) {
+              console.log(data);
+              
               Account.updateUser(data);
+              console.log(Account.getUser());
+              
               User.setUser(data);
               
               console.log(User.getUser);
