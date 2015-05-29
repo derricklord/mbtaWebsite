@@ -7,14 +7,14 @@ angular.module('MyApp')
             .success(function(data) {
               console.log(data);
               
-              Account.updateUser(data);
-              console.log(Account.getUser());
+              //Account.updateUser(data);
+              //console.log(Account.getUser());
               
-              User.setUser(data);
+              //User.setUser(data);
               
-              console.log(User.getUser);
+              //console.log(User.getUser);
               
-              var message = 'You have successfully logged in as ' + User.getDisplayName();
+              var message = 'You have successfully logged ';
               
               $alert({
                 content: message,
