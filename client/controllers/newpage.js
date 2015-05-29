@@ -1,6 +1,12 @@
 angular.module('MyApp')
   .controller('NewPageCtrl', function($scope, $auth, $state, $alert, Page, $stateParams, $location, User ) {  
     $scope.user = User.getUser();
+    $scope.page = {
+        title: '',
+        slug: '',
+        body: ''
+    };
+    
     /**
      * Add New Page
      */

@@ -3,13 +3,13 @@
   <div class="panel panel-default animated fadeInUp">
     <div class="panel-heading">New</div>
     
-      <div ng-if="!user.isAdmin" class="panel-body">
+      <div ng-cloak ng-if="!user.isAdmin" class="panel-body">
           <div class="col-md-12">
               <h1>Not Authorized</h1>
           </div>
       </div>
       
-    <div ng-if="user.isAdmin" class="panel-body">
+    <div ng-cloak ng-if="user.isAdmin" class="panel-body">
       <legend><i class="ion-clipboard"></i> Add New Page</legend>
       <form method="post" ng-submit="postPage()">
         <div class="form-group">
