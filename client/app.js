@@ -133,11 +133,27 @@ angular.module('MyApp', ['ui.bootstrap', 'ngCkeditor', 'ngResource', 'ngSanitize
 
     $urlRouterProvider.otherwise('/');
 
-
+    // Google
     $authProvider.google({
-      clientId: '496782544977-q67gsgn3sguk2vcs6hllm5nc33nd4ih1.apps.googleusercontent.com'
+      url: '/auth/google',
+      authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+      redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
+      //clientId: '442907189268-mjjkghm82onbfj17cupd5kpbi991ipch.apps.googleusercontent.com', //localhost
+      clientId: '496782544977-q67gsgn3sguk2vcs6hllm5nc33nd4ih1.apps.googleusercontent.com',    
+      scope: ['profile', 'email'],
+      scopePrefix: 'openid',
+      scopeDelimiter: ' ',
+      requiredUrlParams: ['scope'],
+      optionalUrlParams: ['display'],
+      display: 'popup',
+      type: '2.0',
+      popupOptions: { width: 580, height: 400 }
     });
-
+    /*
+    $authProvider.google({
+      clientId: '442907189268-mjjkghm82onbfj17cupd5kpbi991ipch.apps.googleusercontent.com'
+    });
+    */
   });
 
 

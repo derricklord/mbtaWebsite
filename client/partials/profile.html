@@ -4,6 +4,9 @@
     <div class="panel-heading">Profile</div>
     <div class="panel-body">
       <legend><i class="ion-ios-person-outline ion-lg"></i> Edit My Profile</legend>
+       <ul>
+        <li ng-if="isAdmin"><a class="btn btn-success pull-right" ui-sref="pages">Edit pages</a></li>
+       </ul> 
       <form method="post" ng-submit="updateProfile()">
         <div class="form-group">
           <label class="control-label">Profile Picture</label>

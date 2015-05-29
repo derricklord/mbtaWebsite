@@ -27,6 +27,7 @@ var rootRoutes = require('./routes/root');
 var authRoutes = require('./routes/auth');
 var apiRoutes = require('./routes/api');
 var pageRoutes = require('./routes/pages');
+var userRoutes = require('./routes/users');
 
 //Initialize Database
 mongoose.connect(config.MONGO_URI);
@@ -60,6 +61,7 @@ app.use('/', rootRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/page', pageRoutes);
+app.use('/user', userRoutes);
 app.use(express.static(path.join(__dirname, 'client')));
 
 

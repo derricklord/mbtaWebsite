@@ -32,7 +32,9 @@ router.get('/test', util.ensureAuthenticated, function(req, res){
     }    
   ];
   res.send({students:students});
-}).get('/users',  function(req, res){
+});
+
+router.get('/users',  function(req, res){
     User.find({}, function(err, users){
       res.send(users);
     });

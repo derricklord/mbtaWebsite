@@ -1,5 +1,11 @@
 angular.module('MyApp')
   .controller('ProfileCtrl', function($scope, $auth, $alert, Account, User, $geolocation) {
+    $scope.user = {
+        displayName:'',
+        picture: '',
+        email: '',
+        isAdmin: false
+    };
     
     $scope.loading = true;
     $scope.map = { center: { latitude: 21.308, longitude: -157.860 }, zoom: 14, pan:true };
@@ -52,10 +58,12 @@ angular.module('MyApp')
     $scope.getProfile = function() {
       Account.getProfile()
         .success(function(data) {
-          Account.updateUser(data);
           User.setUser(data);
 
-          $scope.user = data;
+          $scope.isAdmin = User.isAdmin();
+          $scope.user.displayName = data.displayName;
+          $scope.user.email = data.email;
+          $scope.user.picture = data.picture;
           
           $geolocation.getCurrentPosition({
               timeout: 60000
@@ -101,9 +109,9 @@ angular.module('MyApp')
     $scope.updateProfile = function() {
       Account.updateProfile({
         displayName: $scope.user.displayName,
-        email: $scope.user.email
+        email: $scope.user.email,
+        picture: $scope.user.picture
       }).then(function() {
-        Account.updateUser($scope.user);
         $alert({
           content: 'Profile has been updated',
           animation: 'fadeZoomFadeDown',

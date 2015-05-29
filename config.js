@@ -1,9 +1,11 @@
 module.exports = {
   TOKEN_SECRET: process.env.TOKEN_SECRET || 'A hard to guess string',
   MONGO_URI: process.env.MONGO_URI || 'mongodb://mbtadmin:Orderly123@ds034348.mongolab.com:34348/mbtadata',
+  //MONGO_URI: process.env.MONGO_URI || 'localhost/empty',
   FACEBOOK_SECRET: process.env.FACEBOOK_SECRET || 'Facebook App Secret',
   FOURSQUARE_SECRET: process.env.FOURSQUARE_SECRET || 'Foursquare Client Secret',
-  GOOGLE_SECRET: process.env.GOOGLE_SECRET || '8Y54OAjCPQ-Pzt1m6hAm-8Iy',
+  //GOOGLE_SECRET: process.env.GOOGLE_SECRET || '0DAZutUAh31XFw6ZMTr0gifd', //local google
+  GOOGLE_SECRET: process.env.GOOGLE_SECRET || '8Y54OAjCPQ-Pzt1m6hAm-8Iy',    
   GITHUB_SECRET: process.env.GITHUB_SECRET || 'GitHub Client Secret',
   LINKEDIN_SECRET: process.env.LINKEDIN_SECRET || 'LinkedIn Client Secret',
   WINDOWS_LIVE_SECRET: process.env.WINDOWS_LIVE_SECRET || 'Windows Live Secret',

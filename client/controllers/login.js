@@ -5,16 +5,8 @@ angular.module('MyApp')
         .then(function() {
           Account.getProfile()
             .success(function(data) {
-              console.log(data);
-              
-              Account.updateUser(data);
-              console.log(Account.getUser());
-              
               User.setUser(data);
-              
-              console.log(User.getUser);
-              
-              var message = 'You have successfully logged ';
+              var message = 'You have successfully logged in as ' + User.getDisplayName();
               
               $alert({
                 content: message,
@@ -35,14 +27,10 @@ angular.module('MyApp')
     };
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider)
-        .then(function() {  
+        .then(function() {      
           Account.getProfile()
             .success(function(data) {
-              console.log(data);
-              
-              Account.updateUser(data);
               User.setUser(data);
-              
               var message = 'You have successfully logged in as ' + User.getDisplayName();
               
               $alert({

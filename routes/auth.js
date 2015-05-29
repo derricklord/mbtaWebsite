@@ -18,7 +18,7 @@ var User = require('../models/users');
 var router = express.Router();
 
 
-//Show all Authors
+//Login with Email & Password
 router.post('/login', function(req, res){
   User.findOne({ email: req.body.email }, '+password', function(err, user) {
     if (!user) {
@@ -28,10 +28,14 @@ router.post('/login', function(req, res){
       if (!isMatch) {
         return res.status(401).send({ message: 'Wrong email and/or password' });
       }
-      res.send({ token: util.createToken(user) });
+      res.send({ token: util.createToken(user)});
     });
   });
-}).post('/signup', function(req, res){
+});
+
+
+//Signup with Email & Password
+router.post('/signup', function(req, res){
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
       return res.status(409).send({ message: 'Email is already taken' });
@@ -40,20 +44,19 @@ router.post('/login', function(req, res){
       displayName: req.body.displayName,
       email: req.body.email,
       password: req.body.password,
-      role: req.body.role
+      role: req.body.role,
+      isAdmin: false
     });
-    if(req.body.email === 'derrick.lord@gmail.com'){
-      user.isAdmin = true;
-    }else{
-      user.isAdmin = false;
-    }
-
 
     user.save(function() {
-      res.send({ token: util.createToken(user) });
+      res.send({ token: util.createToken(user)});
     });
   });
-}).post('/google', function(req, res){
+});
+
+
+//Authenticate with Google
+router.post('/google', function(req, res){
   var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
   var peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
   var params = {
@@ -69,11 +72,13 @@ router.post('/login', function(req, res){
     var accessToken = token.access_token;
     var headers = { Authorization: 'Bearer ' + accessToken };
 
-    // Step 2. Retrieve profile information about the current user.
+  // Step 2. Retrieve profile information about the current user.
     request.get({ url: peopleApiUrl, headers: headers, json: true }, function(err, response, profile) {
-
+    
       // Step 3a. Link user accounts.
+      //console.log('Header Information: ' + req.headers.authorization);
       if (req.headers.authorization) {
+          //console.log('Step 3a. Looking for existing google user...');
         User.findOne({ google: profile.sub }, function(err, existingUser) {
           if (existingUser) {
             return res.status(409).send({ message: 'There is already a Google account that belongs to you' });
@@ -87,6 +92,22 @@ router.post('/login', function(req, res){
             user.google = profile.sub;
             user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
             user.displayName = user.displayName || profile.name;
+            user.email = user.email || profile.email;
+             
+              
+            if(profile.hd){
+                if(profile.hd === 'ethompson.org' && profile.email === 'dlord@ethompson.org'){
+                    user.isAdmin = true;
+                }else{
+                    user.isAdmin = false;
+                }
+              }else{
+                if(profile.email === 'derrick.lord@gmail.com'){
+                    user.isAdmin = true;
+                }
+            }  
+              
+              
             user.save(function() {
               var token = util.createToken(user);
               res.send({ token: token });
@@ -94,24 +115,48 @@ router.post('/login', function(req, res){
           });
         });
       } else {
-        // Step 3b. Create a new user account or return an existing one.
+      
+          
+      // Step 3b. Create a new user account or return an existing one.
+        //console.log('Step 3b. Looking for existing google user...');
         User.findOne({ google: profile.sub }, function(err, existingUser) {
           if (existingUser) {
-            return res.send({ token: util.createToken(existingUser) });
+              //console.log('    Found existing user, and creating token...');
+            return res.send({ token: util.createToken(existingUser)});
           }
+          //console.log('    Creating new user...');
           var user = new User();
           user.google = profile.sub;
           user.picture = profile.picture.replace('sz=50', 'sz=200');
           user.displayName = profile.name;
+          user.email = profile.email;
+          
+          if(profile.hd){
+            if(profile.hd === 'ethompson.org' && profile.email === 'dlord@ethompson.org'){
+                user.isAdmin = true;
+            }else{
+                user.isAdmin = false;
+            }
+          }else{
+            if(profile.email === 'derrick.lord@gmail.com'){
+                user.isAdmin = true;
+            }
+          }
+            
+          //console.log('    About to create user: ', user);  
+            
           user.save(function(err) {
+            //console.log('Error: ' + err);
             var token = util.createToken(user);
-            res.send({ token: token });
+            res.send({ token: token}); 
           });
         });
       }
     });
   });
-}).get('/unlink/:provider', util.ensureAuthenticated, function(req, res){
+});
+
+router.get('/unlink/:provider', util.ensureAuthenticated, function(req, res){
   var provider = req.params.provider;
   User.findById(req.user, function(err, user) {
     if (!user) {
