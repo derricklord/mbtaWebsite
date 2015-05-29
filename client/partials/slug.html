@@ -1,10 +1,7 @@
 <div class="container animated fadeInUp" style="color:white;">
   <div class="box2">
 
-      <h1>{{data.title}} <small>@ {{data.slug}}</small>   {{data.id}}</h1>
-    <a ng-if="user.isAdmin" class="btn btn-success" href="/#/p/{{data.slug}}/edit">
-        Edit
-    </a>
+    <h1>{{data.title}} <small>@ {{data.slug}}</small>   {{data.id}}</h1>
     <p ng-bind-html="data.body"></p>  
     <div class="slugimage"><img class="img img-responsive" ng-src="{{data.image}}"/></div>   
     
