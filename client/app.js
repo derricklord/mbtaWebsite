@@ -1,9 +1,10 @@
-angular.module('MyApp', ['ngResource', 'ngMessages', 'ui.router', 'mgcrea.ngStrap', 'satellizer'])
+angular.module('MyApp', ['ui.bootstrap', 'ngCkeditor', 'ngResource', 'ngSanitize', 'ngMessages', 'ui.router', 'mgcrea.ngStrap', 'satellizer', 'ngGeolocation', 'uiGmapgoogle-maps'])
   .config(function($stateProvider, $urlRouterProvider, $authProvider) {
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'HomeCtrl'
       })
       .state('login', {
         url: '/login',
@@ -20,7 +21,20 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ui.router', 'mgcrea.ngStra
         template: null,
         controller: 'LogoutCtrl'
       })
-      .state('/test', {
+      .state('/users', {
+        url: '/users',
+        templateUrl: 'partials/users.html',
+        controller: 'UsersCtrl',
+        resolve: {
+          authenticated: function($q, $location, $auth) {
+            var deferred = $q.defer();
+            deferred.resolve();
+
+            return deferred.promise;
+          }
+        }        
+      }) 
+      .state('test', {
         url: '/test',
         templateUrl: 'partials/data.html',
         controller: 'AccessCtrl',
@@ -37,7 +51,67 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ui.router', 'mgcrea.ngStra
             return deferred.promise;
           }
         }        
-      })         
+      }) 
+       .state('pages', {
+        url: '/pages',
+        templateUrl: 'partials/page.html',
+        controller: 'PageCtrl',
+        resolve: {
+          authenticated: function($q, $location, $auth) {
+            var deferred = $q.defer();
+
+            if (!$auth.isAuthenticated()) {
+              $location.path('/login');
+            } else {
+              deferred.resolve();
+            }
+
+            return deferred.promise;
+          }
+        }        
+      }) 
+      .state('newpage', {
+        url: '/p/new',
+        templateUrl: 'partials/newpage.html',
+        controller: 'NewPageCtrl',
+        resolve: {
+          authenticated: function($q, $location, $auth) {
+            var deferred = $q.defer();
+
+            if (!$auth.isAuthenticated()) {
+              $location.path('/login');
+            } else {
+              deferred.resolve();
+            }
+
+            return deferred.promise;
+          }
+        }        
+      }) 
+      .state('slugpage', {
+        url: '/p/:slug',
+        templateUrl: 'partials/slug.html',
+        controller: 'SlugCtrl',
+        resolve: {
+          authenticated: function($q, $location, $auth) {
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
+          }
+        }        
+      }) 
+       .state('editpage', {
+        url: '/p/:slug/edit',
+        templateUrl: 'partials/editpage.html',
+        controller: 'EditPageCtrl',
+        resolve: {
+          authenticated: function($q, $location, $auth) {
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
+          }
+        }        
+      })   
       .state('profile', {
         url: '/profile',
         templateUrl: 'partials/profile.html',
@@ -65,3 +139,14 @@ angular.module('MyApp', ['ngResource', 'ngMessages', 'ui.router', 'mgcrea.ngStra
     });
 
   });
+
+
+angular.module('MyApp')
+    .controller('HomePageController', function($scope, $auth, User, Account){
+        if($auth.isAuthenticated){
+            $scope.user = User.getUser().displayName;
+            
+        }else{
+            $scope.user = 'Guest';
+        }
+    });

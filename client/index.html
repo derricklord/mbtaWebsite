@@ -6,32 +6,54 @@
   <title>Myron B. Thompson Academy</title>
   <link href="favicon.png" rel="shortcut icon">
   <link href="//fonts.googleapis.com/css?family=Roboto|Montserrat:400,700|Open+Sans:400,300,600" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400' rel='stylesheet' type='text/css'>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
   <link href="//cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
   <link href="stylesheets/animate.css" rel="stylesheet">
+ 
   <link href="stylesheets/styles.css" rel="stylesheet">
   <link href="stylesheets/app.css" rel="stylesheet">
+  
+  <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>  
+  
 </head>
-<body>
+<body ng-controller="HomePageController">
 <div id="header" ng-controller="NavbarCtrl" class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-header">
     <a class="navbar-brand" href="/#/"><img id="login_logo" class="img-responsive" ng-src="../img/main_logo.png"/></a>
   </div>
-  <ul class="nav navbar-nav">
+  <ul class="nav navbar-nav hidden-xs">
     <li><a href="/#/">Home</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
-    <li ng-if="isAuthenticated()"><a href="/#/test">Data</a></li>
+    <li><a ng-click="about()" href="">About</a></li> 
+    <li><a ng-click="whatsHappening()" href="">What's Happening</a></li>  
+    <li class="dropdown" dropdown on-toggle="toggled(open)">
+      <a href class="dropdown-toggle" dropdown-toggle>Programs</a>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-if="isAuthenticated()"><a ui-sref="pages">All pages</a></li>
+        <li ng-if="isAuthenticated()"><a ui-sref="newpage">New Page</a></li>
+        <li><a href="/#/p/elementary">Elementary</a></li>
+        <li><a href="/#/p/secondary">Secondary</a></li> 
+        <li><a href="/#/p/curriculum">Curriculum</a></li>        
+        <li class="divider"></li>
+        <li><a href="/#/p/tea">Extension Academy</a></li>
+        <li><a href="/#/p/summer">Summer School</a></li>        
+        <li class="divider"></li>
+        <li><a href="/#/p/board">Governing Board</a></li>
+      </ul>
+    </li> 
   </ul>
-  <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a href="/#/login">Login</a></li>
-    <li><a href="/#/signup">Sign up</a></li>
-  </ul>
-  <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a href="/#/logout">Logout</a></li>
+  <ul class="nav navbar-nav hidden-xs pull-right">
+    <li ng-cloak ng-if="!isAuthenticated()"><a href="/#/login">Login</a></li>        
+    <li ng-cloak ng-if="isAuthenticated()"><a href="/#/logout">Logout</a></li> 
+    <li ng-cloak ng-if="isAuthenticated()"><a href="/#/profile"><i class="ion-ios-settings ion-lg"></i></a></li>     
   </ul>
 </div>
+
+
 
 <div ui-view class="fadeZoom" id="main_view"></div>
 
@@ -40,13 +62,29 @@
 <script src="//cdn.jsdelivr.net/headroomjs/0.7.0/headroom.min.js"></script>
 <script src="//cdn.jsdelivr.net/headroomjs/0.7.0/angular.headroom.min.js"></script>
 <script src="//cdn.jsdelivr.net/headroomjs/0.7.0/jQuery.headroom.min.js"></script>
+<script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+
+
+
+
 
 <!-- Third-party Libraries -->
+<script src="vendor/geolib/geolib.min.js"></script>
 <script src="vendor/angular.js"></script>
+<script src="vendor/lodash.min.js"></script>
+<script src="vendor/angular-google-maps.min.js"></script>
 <script src="vendor/angular-messages.js"></script>
+<script src="vendor/angular-sanitize.js"></script>
 <script src="vendor/angular-resource.js"></script>
 <script src="vendor/angular-animate.js"></script>
 <script src="vendor/angular-ui-router.js"></script>
+<script src="vendor/ngGeolocation.min.js"></script>
+<script src="vendor/ng-ckeditor.js"></script>
+
+
+<script src="vendor/ui-bootstrap-tpls.min.js"></script>
+<script src="vendor/ui-bootstrap.min.js"></script>
+
 <script src="vendor/angular-strap.js"></script>
 <script src="vendor/angular-strap.tpl.js"></script>
 <script src="vendor/headroom.min.js"></script>
@@ -55,15 +93,28 @@
 
 <!-- Application Code -->
 <script src="app.js"></script>
+
 <script src="directives/passwordStrength.js"></script>
 <script src="directives/passwordMatch.js"></script>
+
 <script src="controllers/login.js"></script>
 <script src="controllers/signup.js"></script>
 <script src="controllers/logout.js"></script>
 <script src="controllers/profile.js"></script>
+<script src="controllers/home.js"></script>
 <script src="controllers/access.js"></script>
+<script src="controllers/pages.js"></script>
+<script src="controllers/newpage.js"></script>
+<script src="controllers/editpage.js"></script>
+<script src="controllers/slug.js"></script>
+<script src="controllers/users.js"></script>
 <script src="controllers/navbar.js"></script>
+
 <script src="services/account.js"></script>
+<script src="services/pages.js"></script>
+
+
+
 
 <script>
 $(function(){

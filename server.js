@@ -21,9 +21,12 @@ var request = require('request');
 var config = require('./config');
 var util = require('./lib/util.js');
 var User = require('./models/users'); 
-var testRoutes = require('./routes/test'); 
+var Page = require('./models/pages');
+
+var rootRoutes = require('./routes/root'); 
 var authRoutes = require('./routes/auth');
 var apiRoutes = require('./routes/api');
+var pageRoutes = require('./routes/pages');
 
 //Initialize Database
 mongoose.connect(config.MONGO_URI);
@@ -41,7 +44,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'client')));
+
 
 // Force HTTPS on Heroku
 if (app.get('env') === 'production') {
@@ -53,10 +56,11 @@ if (app.get('env') === 'production') {
 
 
 //Configure Routes
-app.use('/', testRoutes);
+app.use('/', rootRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-
+app.use('/page', pageRoutes);
+app.use(express.static(path.join(__dirname, 'client')));
 
 
 //Start Server listening on port 3000

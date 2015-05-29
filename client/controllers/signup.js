@@ -4,7 +4,8 @@ angular.module('MyApp')
       $auth.signup({
         displayName: $scope.displayName,
         email: $scope.email,
-        password: $scope.password
+        password: $scope.password,
+        role: $scope.role || 'student'
       }).catch(function(response) {
         if (typeof response.data.message === 'object') {
           angular.forEach(response.data.message, function(message) {

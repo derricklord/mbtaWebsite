@@ -14,7 +14,9 @@ var userSchema = new mongoose.Schema({
   live: String,
   yahoo: String,
   twitter: String,
-  isAdmin: Boolean
+  isAdmin: Boolean,
+  role: String,
+  roleVerified: Boolean
 });
 
 userSchema.pre('save', function(next) {

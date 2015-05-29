@@ -1,0 +1,33 @@
+<div class="container">
+
+  <div class="panel panel-default animated fadeInUp">
+    <div class="panel-heading">New</div>
+    
+      <div ng-if="!user.isAdmin" class="panel-body">
+          <div class="col-md-12">
+              <h1>Not Authorized</h1>
+          </div>
+      </div>
+      
+    <div ng-if="user.isAdmin" class="panel-body">
+      <legend><i class="ion-clipboard"></i> Add New Page</legend>
+      <form method="post" ng-submit="postPage()">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control" id="title" type="text" ng-model="page.title" placeholder="title..."/>
+        </div>
+        <div class="form-group">
+            <label for="slug">Slug</label>
+            <input class="form-control" type="text" ng-model="page.slug" placeholder="slug..."/>
+        </div>
+        <div class="form-group">
+            <textarea ckeditor="" ng-model="page.body" rows="10" cols="30"/> 
+            </textarea>
+        </div>
+       
+        <button class="btn btn-lg btn-success pull-right">Save</button>
+        <button class="btn btn-lg btn-danger pull-right" ui-sref="pages">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

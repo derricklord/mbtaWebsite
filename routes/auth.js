@@ -1,5 +1,4 @@
 var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
 var request = require('request');
 var path = require('path');
@@ -15,6 +14,8 @@ var config = require('../config');
 var util = require('../lib/util.js');
 var User = require('../models/users');
 
+
+var router = express.Router();
 
 
 //Show all Authors
@@ -38,7 +39,8 @@ router.post('/login', function(req, res){
     var user = new User({
       displayName: req.body.displayName,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      role: req.body.role
     });
     if(req.body.email === 'derrick.lord@gmail.com'){
       user.isAdmin = true;

@@ -1,11 +1,13 @@
 var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
+
 var config = require('../config');
 var util = require('../lib/util.js');
+
 var User = require('../models/users');
+var Page = require('../models/pages');
 
-
+var router = express.Router();
 
 //Show all Authors
 router.get('/test', util.ensureAuthenticated, function(req, res){
@@ -30,7 +32,7 @@ router.get('/test', util.ensureAuthenticated, function(req, res){
     }    
   ];
   res.send({students:students});
-}).get('/users', util.ensureAuthenticated, function(req, res){
+}).get('/users',  function(req, res){
     User.find({}, function(err, users){
       res.send(users);
     });

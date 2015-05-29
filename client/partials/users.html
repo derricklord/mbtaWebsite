@@ -1,0 +1,19 @@
+<div class="container animated fadeInUp">
+  <div class="panel panel-default  ">
+    <div class="panel-heading">User Data</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="list-group">
+              <li ng-repeat="user in users" class="list-group-item">
+                <p>
+                  {{user._id}}
+                  <span class="text-danger">{{user.displayName}}</span>
+                </p>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

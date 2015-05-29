@@ -27,5 +27,6 @@ angular.module('MyApp')
 
 
     $scope.getData();
+    $scope.user = Account.user;
 
   });

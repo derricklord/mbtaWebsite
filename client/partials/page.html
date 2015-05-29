@@ -1,0 +1,39 @@
+<div class="container animated fadeInUp">
+  <div class="panel panel-default  ">
+    <div class="panel-heading">All Pages for {{user.displayName}}</div>
+    <div class="panel-body">
+      <div ng-if="user.isAdmin" class="row">
+          <div class="col-md-12">
+              <h1>Site Pages</h1>
+          </div>
+      </div>
+      <div ng-if="!user.isAdmin" class="row">
+          <div class="col-md-12">
+              <h1>Not Authorized</h1>
+          </div>
+      </div>
+      <div ng-if="user.isAdmin" class="row">
+        <div class="col-sm-12">
+          <ul class="list-group">
+              <li class="list-group-item" ng-repeat="page in data">
+                  <p>
+                    <i class="glyphicon glyphicon-leaf"></i>
+                    <a href="/#/p/{{page.slug}}" style="color:green;">{{page.title}}</a>
+                    <small style="margin-left: 40px;" >  Slug: {{page.slug}}</small>
+                    <a href="/#/p/{{page.slug}}/edit" class="btn btn-primary pull-right" >
+                        Edit
+                    </a>                   
+                    <button class="btn btn-danger pull-right" ng-click="deletePage(page._id)">
+                        Delete
+                    </button>                 
+                  </p>
+              </li>
+          </ul>
+                    <a class="btn btn-success pull-right" ui-sref="newpage">
+                        New
+                    </a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

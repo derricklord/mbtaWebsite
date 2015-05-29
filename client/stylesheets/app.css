@@ -1,9 +1,82 @@
-
-
-#main_view{
-	padding-top: 80px;
+.navbar{
+    font-size: 18px;
 }
 
+.ion-lg{
+    font-size: 28px;
+}
+
+.slugimage{
+    position: absolute;
+    bottom:0;
+    left:60%;
+    vertical-align: bottom;
+    z-index: -1;
+
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+  color: #0f9d58;
+  background-color: transparent;
+}
+
+#map { 
+    height: 180px; 
+    margin-top: 50px;
+    margin-bottom: 50px;
+    
+}
+.angular-google-map-container {
+    height: 400px; 
+    margin-bottom: 20px;
+}
+
+.marker-label{
+    font-size: 14px;
+    color: white;
+    background-color: rgba(0,0,0, .55);
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+#header{
+    border-bottom: 1px;
+    border-bottom-color: darkgrey;
+    border-bottom-style: solid;
+}
+
+#calendar{
+  margin-top: 5px;
+  font-size: 36px;
+  margin-left: 10px;
+  color: white;
+}
+
+#main_view{
+	padding-top: 60px;
+  margin-right:0px;
+  width: 100%;
+}
+
+#mag{
+  margin-top:10px;
+  margin-bottom: 0px;
+}
 
 .box{
   display:block;
@@ -14,23 +87,88 @@
 
 }
 
+.box2{
+  display:block;
+  margin: 10px;
+  background-color: rgba(0,0,0, .45);
+  border-radius: 10px;
+  padding: 20px;
+  padding-bottom:10;
+  min-height: 500px;
+  position: relative;
+  font-size: 20px;
+
+}
+
+.box2 h1, .box2 label{
+    color: white;
+}
+
+.service-icon {
+  margin-bottom: 20px;
+} 
+
+.service-box{
+  text-align: center;
+  margin:10px;
+}
+
+#feature{
+  color: white;
+}
 
 #callToAction{
   width: 100%;
   background-color: rgba(0,0,0, .45);
-  margin-bottom: 20px;
   padding-top: 30px;
   padding-bottom: 30px;
+  border-top: 1px;
+  border-top-color: darkgrey;
+  border-bottom-color: black;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .65);  
+  border-top-style: solid;   
 }
 
+#feature_msg{
+  background-color: rgba(0,0,0, .45);
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#aboutUs{
+  width: 100%;
+  background-color: rgba(255,255,255, .80);
+  min-height: 400px;
+  padding-bottom: 20px;
+  padding-top:60px;
+}
+
+
+#whatsHappening{
+  color:white;
+  /*background-color: #0f9d58;*/
+  /*background-color: rgba(0,200,0, .45);*/
+  padding-top: 60px;
+  width: 100%;
+  min-height: 400px;
+}
+
+#applyNow{
+  width: 100%;
+  background-color: rgba(255,255,255, .80);
+  min-height: 400px;
+  padding: 20px;
+}
 .headroom--pinned {
-  opacity: 1;
+  /*opacity: 1;*/
 }
 
 
 
 .headroom--unpinned{
-	opacity: .35;
+	/*opacity: .35;*/
 }
 
 
