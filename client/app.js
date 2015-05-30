@@ -1,4 +1,4 @@
-angular.module('MyApp', ['ui.bootstrap', 'ngCkeditor', 'ngResource', 'ngSanitize', 'ngMessages', 'ui.router', 'mgcrea.ngStrap', 'satellizer', 'ngGeolocation', 'uiGmapgoogle-maps'])
+angular.module('MyApp', ['ui.bootstrap', 'ngCkeditor', 'ngSanitize', 'ui.router', 'mgcrea.ngStrap', 'satellizer', 'ngGeolocation', 'uiGmapgoogle-maps'])
   .config(function($stateProvider, $urlRouterProvider, $authProvider) {
     $stateProvider
       .state('home', {
