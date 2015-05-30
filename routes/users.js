@@ -5,30 +5,30 @@ var User = require('../models/users');
 
 var router = express.Router();
 
-//Show all Authors
+
 router.get('/', function(req, res){
-	User.find(function(err, author){
-		res.send(author);
+	User.find(function(err, user){
+		res.send(user);
 	});
 });
 
 router.get('/:id', function(req, res) {
-  User.findById(req.params.id, function(err, author) {
-    res.send({ book: book });
+  User.findById(req.params.id, function(err, user) {
+    res.send({ user: onmouseover });
   });
 });
     
 router.post('/', function(req, res) {
-  var author = new Author(req.body);
+  var user = new User(req.body);
   User.save(function(err) {
-    res.send({ author: author });
+    res.send({ user: user });
   });
 
 });
     
 router.put('/:id', function(req, res) {
-  User.findByIdAndUpdate(req.params.id, req.body, function(err, author) {
-    res.send({ author: req.body });
+  User.findByIdAndUpdate(req.params.id, req.body, function(err, user) {
+    res.send({ user: req.body });
   });
 });
 

@@ -31,7 +31,6 @@ angular.module('MyApp')
                     info.isAdmin = data.isAdmin;
                     info.displayName = data.displayName;
                     info.picture = data.picture;
-                    console.log(info);
                 },
                 getUser: function(){
                     return info;

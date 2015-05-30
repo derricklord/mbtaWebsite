@@ -93,19 +93,26 @@ router.post('/google', function(req, res){
             user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
             user.displayName = user.displayName || profile.name;
             user.email = user.email || profile.email;
+            user.isEnrolled = false;
              
               
-            if(profile.hd){
-                if(profile.hd === 'ethompson.org' && profile.email === 'dlord@ethompson.org'){
-                    user.isAdmin = true;
-                }else{
-                    user.isAdmin = false;
-                }
-              }else{
-                if(profile.email === 'derrick.lord@gmail.com'){
-                    user.isAdmin = true;
-                }
-            }  
+          if(profile.hd){
+              
+            if(profile.hd === 'ethompson.org' && profile.email === 'dlord@ethompson.org'){
+                user.isAdmin = true;
+                user.isEnrolled = true;
+            }else{
+                user.isAdmin = false;
+                user.isEnrolled = true;
+            }
+          }else{
+            if(profile.email === 'derrick.lord@gmail.com'){
+                user.isAdmin = true;
+                user.isEnrolled = true;
+            }else{
+                user.isEnrolled = false;
+            }
+          }
               
               
             user.save(function() {
@@ -121,7 +128,7 @@ router.post('/google', function(req, res){
         //console.log('Step 3b. Looking for existing google user...');
         User.findOne({ google: profile.sub }, function(err, existingUser) {
           if (existingUser) {
-              //console.log('    Found existing user, and creating token...');
+              //console.log('    Found existing user, and creating token...');         
             return res.send({ token: util.createToken(existingUser)});
           }
           //console.log('    Creating new user...');
@@ -130,16 +137,22 @@ router.post('/google', function(req, res){
           user.picture = profile.picture.replace('sz=50', 'sz=200');
           user.displayName = profile.name;
           user.email = profile.email;
+          user.isEnrolled = false;
           
           if(profile.hd){
             if(profile.hd === 'ethompson.org' && profile.email === 'dlord@ethompson.org'){
                 user.isAdmin = true;
+                user.isEnrolled = true;
             }else{
                 user.isAdmin = false;
+                user.isEnrolled = true;
             }
           }else{
             if(profile.email === 'derrick.lord@gmail.com'){
                 user.isAdmin = true;
+                user.isEnrolled = true;
+            }else{
+                user.isEnrolled = false;
             }
           }
             

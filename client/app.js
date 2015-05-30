@@ -149,11 +149,6 @@ angular.module('MyApp', ['ui.bootstrap', 'ngCkeditor', 'ngResource', 'ngSanitize
       type: '2.0',
       popupOptions: { width: 580, height: 400 }
     });
-    /*
-    $authProvider.google({
-      clientId: '442907189268-mjjkghm82onbfj17cupd5kpbi991ipch.apps.googleusercontent.com'
-    });
-    */
   });
 
 

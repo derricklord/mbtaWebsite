@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
   facebook: String,
   google: String,
   isAdmin: Boolean,
+  isEnrolled: Boolean,
   role: String,
   roleVerified: Boolean
 });

@@ -1,12 +1,7 @@
 <div class="container animated fadeInUp">
   <div class="panel panel-default  ">
-    <div class="panel-heading">All Pages for {{user.displayName}}</div>
+    <div class="panel-heading">Site Pages</div>
     <div class="panel-body">
-      <div ng-if="user.isAdmin" class="row">
-          <div class="col-md-12">
-              <h1>Site Pages</h1>
-          </div>
-      </div>
       <div ng-if="!user.isAdmin" class="row">
           <div class="col-md-12">
               <h1>Not Authorized</h1>
@@ -15,11 +10,13 @@
       <div ng-if="user.isAdmin" class="row">
         <div class="col-sm-12">
           <ul class="list-group">
-              <li class="list-group-item" ng-repeat="page in data">
+              <li class="list-group-item" ng-repeat="page in data" style="min-height: 40px;">
                   <p>
                     <i class="glyphicon glyphicon-leaf"></i>
                     <a href="/#/p/{{page.slug}}" style="color:green;">{{page.title}}</a>
-                    <small style="margin-left: 40px;" >  Slug: {{page.slug}}</small>
+                    <small style="margin-left: 20px;" >  
+                    -- Created By: {{page.created_by.displayName}}
+                    </small>
                     <a href="/#/p/{{page.slug}}/edit" class="btn btn-primary pull-right" >
                         Edit
                     </a>                   

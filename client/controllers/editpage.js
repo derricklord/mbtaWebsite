@@ -1,9 +1,6 @@
 angular.module('MyApp')
-  .controller('EditPageCtrl', function($scope, $auth, $state, $alert, Page, $stateParams, $location ) {  
+  .controller('EditPageCtrl', function($scope, $auth, $state, $alert, Page, User, $stateParams, $location ) {  
 
-/**
-     * Add New Page
-     */
     
      var slug = $stateParams.slug;
     
@@ -26,13 +23,15 @@ angular.module('MyApp')
 
   
     $scope.updatePage = function() {
-        console.log('Updating page!');
+      $scope.user = User.getUser();
+      console.log($scope.user);
       Page.updatePage({
         _id: $scope.page._id,
         title: $scope.page.title,
         slug: $scope.page.slug,
         body: $scope.page.body,
-        image: $scope.page.image
+        image: $scope.page.image,
+        created_by: $scope.user.id
       }).then(function(response) {      
           $alert({
           content: 'Page has been Updated!',

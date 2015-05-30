@@ -4,7 +4,9 @@ angular.module('MyApp')
     $scope.page = {
         title: '',
         slug: '',
-        body: ''
+        body: '',
+        created_on:  Date.now(),
+        created_by: $scope.user.id || ''
     };
     
     /**
@@ -18,7 +20,9 @@ angular.module('MyApp')
       Page.postPage({
         title: $scope.page.title,
         slug: $scope.page.slug,
-        body: $scope.page.body
+        body: $scope.page.body,
+        created_on: Date.now(),
+        created_by: $scope.user.id
       }).then(function(response) {      
           $alert({
           content: 'Page has been Added!',
